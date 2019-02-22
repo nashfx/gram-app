@@ -7,7 +7,7 @@ export class AppService {
 
 	constructor(private http: HttpClient) {}
 
-    getPictures(){
+    getPics(){
   		return this.http.get(this.url);
   	}
 

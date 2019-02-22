@@ -10,7 +10,7 @@ export class AppComponent {
   	title = 'gram-app';
   	tiles: any = [];
  	user: any;
-	pictures: any;
+	pics: any;
 
 	constructor(
   		private appService: AppService
@@ -30,9 +30,20 @@ export class AppComponent {
 		    {text: 'Nine', cols: 2, rows: 4, color: '#DFC321'}
 		];
 
-		this.appService.getUser().subscribe((data) => {
+		this.getUser();
+		this.getPics();
+	}
+
+	getUser(){
+		this.appService.getUser().subscribe((data:any) => {
 			this.user = data.data;
 		});
+	}
+
+	getPics(){
+		this.appService.getPics().subscribe((data:any) => {
+			console.log(data.data);
+		});		
 	}
 
 
