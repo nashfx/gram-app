@@ -1,16 +1,16 @@
-<div class="wrapper"*ngIf="user">
+<div class="wrapper">
 
-  <div style="text-align: center;">
-    <div style="font-size: 56px; font-family: 'Work Sans'; ">Sortagram</div>
+  <div class="centered">
+    <div class="bigTitle">Sortagram</div>
     <hr/>    
     
-    <div style="display: flex;">
-      <div style="width: 30%;"></div>
-      <div style="width: 22%;">
-        <img style="border-radius: 50%;" src="{{user.profile_picture}}" alt="Foto de perfil - {{user.username}}" />
-        <p style="font-size: 16px; font-weight: 900;">{{user.username}}</p>
+    <div class="wrapData" *ngIf="user">
+      <div class="spacer"></div>
+      <div class="profileWrapper">
+        <img class="profile" src="{{user.profile_picture}}" alt="Foto de perfil - {{user.username}}" />
+        <p class="username">{{user.username}}</p>
       </div>
-      <div style="padding-top: 10px; width: auto; text-align: left !important; font-family: 'Work Sans';">
+      <div class="userInfo">
         <p><small>{{user.bio}}</small></p>
         <p>Siguiendo: <strong>{{ user.counts.follows }}</strong></p> 
         <p>Seguidores: <strong>{{ user.counts.followed_by}}</strong></p>  
@@ -18,16 +18,19 @@
     </div>
   </div>
 
-  <div class="solid">
+  <div class="solid" *ngIf="pics">
     <mat-grid-list cols="4" rowHeight="100px">
-      <mat-grid-tile
-          *ngFor="let tile of tiles"
+      <mat-grid-tile *ngFor="let tile of photo; let i = index;"
           [colspan]="tile.cols"
           [rowspan]="tile.rows"
           [style.background]="tile.color">
-        {{tile.text}}
+            <span class="spanvalues" *ngIf="tile.cols > 1">
+              <img src="{{ pics[i].images.standard_resolution.url}}" class="image">
+            </span>
+            <span class="spanvalues" *ngIf="tile.cols == 1">
+              <img src="{{ pics[i].images.low_resolution.url}}" class="image">
+            </span>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-
 </div>
